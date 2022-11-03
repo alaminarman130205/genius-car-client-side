@@ -16,10 +16,12 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const createuser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const Login = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -27,6 +29,7 @@ const AuthProvider = ({ children }) => {
     const unSubscibe = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
       setUser(currentUser);
+      setLoading(false);
     });
     return () => {
       return unSubscibe();
